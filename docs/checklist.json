@@ -1,0 +1,27 @@
+{
+  "items": [
+    { "id": "dirs", "title": "Create frontend/ and backend/", "done": false },
+    { "id": "frontend-scaffold", "title": "Vite React + AntD + MUI setup", "done": false },
+    { "id": "backend-scaffold", "title": "Node TS backend (Fastify/Express)", "done": false },
+    { "id": "db", "title": "Postgres connection + migrations", "done": false },
+    { "id": "auth", "title": "Email/password auth + JWT sessions", "done": false },
+    { "id": "sso", "title": "SSO SAML/OIDC configuration screens (stub)", "done": false },
+    { "id": "rbac", "title": "RBAC roles/permissions baseline", "done": false },
+    { "id": "orgs-projects", "title": "Orgs/Projects/Teams CRUD APIs", "done": false },
+    { "id": "issues", "title": "Issues CRUD + board + backlog", "done": false },
+    { "id": "sprints", "title": "Sprints create/start/close endpoints", "done": false },
+    { "id": "wiki", "title": "Wiki pages CRUD + export PDF stub", "done": false },
+    { "id": "integrations-basic", "title": "GitHub commits link + Slack notifications", "done": false },
+    { "id": "storage", "title": "S3/MinIO config + upload API", "done": false },
+    { "id": "admin-branding", "title": "Admin console + branding upload", "done": false },
+    { "id": "onprem", "title": "Docker Compose + LICENSE_KEY support", "done": false },
+    { "id": "license-service", "title": "License validation + offline activation", "done": false },
+    { "id": "webhooks", "title": "Webhooks issue.created/updated", "done": false },
+    { "id": "openapi", "title": "OpenAPI generation", "done": false },
+    { "id": "ci", "title": "GitHub Actions build/test", "done": false },
+    { "id": "observability", "title": "Metrics/logs baseline", "done": false },
+    { "id": "importers", "title": "CSV + Jira import (basic)", "done": false },
+    { "id": "marketplace", "title": "Marketplace skeleton + 20 connectors", "done": false },
+    { "id": "mobile-notify", "title": "Mobile notifications (server)", "done": false }
+  ]
+}

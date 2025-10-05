@@ -1,0 +1,139 @@
+{
+  "version": "0.1.0",
+  "sections": [
+    {
+      "id": "core",
+      "title": "Core Platform",
+      "items": [
+        { "id": "repo-structure", "title": "Repo structure", "done": true },
+        { "id": "backend-scaffold", "title": "Backend scaffold (Fastify+TS+Prisma+Postgres)", "done": true },
+        { "id": "env-config", "title": "Env config and example", "done": true },
+        { "id": "health", "title": "Health endpoint", "done": true },
+        { "id": "docker-compose", "title": "Docker Compose (API+DB)", "done": false },
+        { "id": "ci", "title": "CI build/test and lint", "done": false }
+      ]
+    },
+    {
+      "id": "identity",
+      "title": "Identity & Access",
+      "items": [
+        { "id": "auth-register", "title": "Register", "done": true },
+        { "id": "auth-login", "title": "Login", "done": true },
+        { "id": "auth-me", "title": "Me", "done": true },
+        { "id": "password-reset", "title": "Password reset", "done": false },
+        { "id": "sso", "title": "SSO config", "done": false },
+        { "id": "scim", "title": "SCIM provisioning", "done": false },
+        { "id": "mfa", "title": "MFA TOTP/WebAuthn", "done": false },
+        { "id": "sessions", "title": "Session/device mgmt", "done": false },
+        { "id": "guests", "title": "Guest users", "done": false },
+        { "id": "auth-audit", "title": "Auth audit logs", "done": false }
+      ]
+    },
+    {
+      "id": "orgs-projects",
+      "title": "Organizations, Workspaces & Teams",
+      "items": [
+        { "id": "org-create", "title": "Create Org", "done": true },
+        { "id": "org-get", "title": "Get Org", "done": true },
+        { "id": "org-list", "title": "List Orgs", "done": false },
+        { "id": "teams", "title": "Teams CRUD", "done": false },
+        { "id": "project-perms", "title": "Project permissions & roles", "done": false },
+        { "id": "branding", "title": "Org branding upload", "done": false },
+        { "id": "org-policies", "title": "Org policies", "done": false }
+      ]
+    },
+    {
+      "id": "issues",
+      "title": "Projects & Issues",
+      "items": [
+        { "id": "projects-list", "title": "List Projects", "done": true },
+        { "id": "projects-create", "title": "Create Project", "done": true },
+        { "id": "issues-list", "title": "List Issues", "done": true },
+        { "id": "issues-create", "title": "Create Issue", "done": true },
+        { "id": "issues-update", "title": "Update Issue", "done": true },
+        { "id": "comments", "title": "Issue comments & mentions", "done": false },
+        { "id": "attachments", "title": "Attachments", "done": false },
+        { "id": "custom-fields", "title": "Custom fields/types", "done": false },
+        { "id": "workflows", "title": "Workflows", "done": false },
+        { "id": "boards", "title": "Boards", "done": false },
+        { "id": "backlog", "title": "Backlog bulk ops", "done": false },
+        { "id": "sprints", "title": "Sprints", "done": false },
+        { "id": "roadmaps", "title": "Roadmaps", "done": false },
+        { "id": "releases", "title": "Releases & versions", "done": false },
+        { "id": "sla", "title": "SLA policies", "done": false }
+      ]
+    },
+    {
+      "id": "wiki",
+      "title": "Knowledge & Docs",
+      "items": [
+        { "id": "pages-list", "title": "List Pages", "done": true },
+        { "id": "pages-create", "title": "Create Page", "done": true },
+        { "id": "pages-update", "title": "Update Page", "done": true },
+        { "id": "pages-export", "title": "Export Page", "done": true },
+        { "id": "page-versioning", "title": "Versioning & rollback", "done": false },
+        { "id": "page-perms", "title": "Page permissions", "done": false },
+        { "id": "portals", "title": "Public/Private portals", "done": false }
+      ]
+    },
+    {
+      "id": "integrations",
+      "title": "Integrations & DevOps",
+      "items": [
+        { "id": "link-commits", "title": "Link commits/PRs", "done": false },
+        { "id": "pipelines", "title": "Pipeline status", "done": false },
+        { "id": "deployments", "title": "Deployment tracking", "done": false },
+        { "id": "connectors-20", "title": "20 core connectors", "done": false }
+      ]
+    },
+    {
+      "id": "automation",
+      "title": "Automation & Notifications",
+      "items": [
+        { "id": "rules", "title": "Rule builder", "done": false },
+        { "id": "schedulers", "title": "Schedulers/cron", "done": false },
+        { "id": "webhooks", "title": "Webhooks mgmt", "done": false },
+        { "id": "email", "title": "Email provider", "done": false },
+        { "id": "slack-teams", "title": "Slack/Teams", "done": false }
+      ]
+    },
+    {
+      "id": "billing",
+      "title": "Billing & Licensing",
+      "items": [
+        { "id": "billing-model", "title": "Billing model endpoints", "done": false },
+        { "id": "invoices", "title": "Invoices & payments", "done": false },
+        { "id": "license", "title": "On-prem license validation", "done": false }
+      ]
+    },
+    {
+      "id": "admin",
+      "title": "Admin & Audit",
+      "items": [
+        { "id": "audit-logs", "title": "Audit logs + export", "done": false },
+        { "id": "residency", "title": "Data residency & export", "done": false },
+        { "id": "maintenance", "title": "Maintenance windows", "done": false }
+      ]
+    },
+    {
+      "id": "platform-nfr",
+      "title": "Platform NFRs",
+      "items": [
+        { "id": "security-headers", "title": "Security headers", "done": false },
+        { "id": "validation", "title": "Validation coverage", "done": false },
+        { "id": "rbac", "title": "RBAC checks", "done": false },
+        { "id": "telemetry", "title": "Telemetry (OTel) + metrics", "done": false },
+        { "id": "backups", "title": "Backups & migrations automation", "done": false }
+      ]
+    },
+    {
+      "id": "import-export",
+      "title": "Import/Export",
+      "items": [
+        { "id": "csv-import", "title": "CSV importer", "done": false },
+        { "id": "jira-import", "title": "Jira importer (basic)", "done": false },
+        { "id": "exports", "title": "Export CSV/JSON", "done": false }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "info": { "name": "WorkSphere API", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json", "version": "0.1.4" },
+  "item": [
+    { "name": "Auth", "item": [
+      {"name":"Register","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/auth/register","host":["{{baseUrl}}"],"path":["api","v1","auth","register"]},"body":{"mode":"raw","raw":"{\n  \"email\": \"user@example.com\",\n  \"name\": \"User\",\n  \"password\": \"Passw0rd!\"\n}"}}},
+      {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/auth/login","host":["{{baseUrl}}"],"path":["api","v1","auth","login"]},"body":{"mode":"raw","raw":"{\n  \"email\": \"user@example.com\",\n  \"password\": \"Passw0rd!\"\n}"}}},
+      {"name":"Me","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/auth/me","host":["{{baseUrl}}"],"path":["api","v1","auth","me"]}}},
+      {"name":"Password Reset Request","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/auth/password/reset/request","host":["{{baseUrl}}"],"path":["api","v1","auth","password","reset","request"]},"body":{"mode":"raw","raw":"{\n  \"email\": \"user@example.com\"\n}"}}},
+      {"name":"Password Reset Confirm","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/auth/password/reset/confirm","host":["{{baseUrl}}"],"path":["api","v1","auth","password","reset","confirm"]},"body":{"mode":"raw","raw":"{\n  \"token\": \"<paste-token>\",\n  \"password\": \"NewPassw0rd!\"\n}"}}}
+    ]},
+    { "name": "Organizations", "item": [
+      {"name":"Create Org","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs","host":["{{baseUrl}}"],"path":["api","v1","orgs"]},"body":{"mode":"raw","raw":"{\n  \"name\": \"Acme Inc\",\n  \"slug\": \"acme\"\n}"}}},
+      {"name":"Get Org","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs/{{orgId}}","host":["{{baseUrl}}"],"path":["api","v1","orgs","{{orgId}}"]}}},
+      {"name":"List Members","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs/{{orgId}}/members","host":["{{baseUrl}}"],"path":["api","v1","orgs","{{orgId}}","members"]}}},
+      {"name":"Set Role","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs/{{orgId}}/members/set-role","host":["{{baseUrl}}"],"path":["api","v1","orgs","{{orgId}}","members","set-role"]},"body":{"mode":"raw","raw":"{\n  \"userId\": \"<userId>\",\n  \"role\": \"ORG_ADMIN\"\n}"}}},
+      {"name":"Remove Member","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs/{{orgId}}/members/remove","host":["{{baseUrl}}"],"path":["api","v1","orgs","{{orgId}}","members","remove"]},"body":{"mode":"raw","raw":"{\n  \"userId\": \"<userId>\"\n}"}}}
+    ]},
+    { "name": "Projects", "item": [
+      {"name":"List Projects","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs/{{orgId}}/projects","host":["{{baseUrl}}"],"path":["api","v1","orgs","{{orgId}}","projects"]}}},
+      {"name":"Create Project","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/orgs/{{orgId}}/projects","host":["{{baseUrl}}"],"path":["api","v1","orgs","{{orgId}}","projects"]},"body":{"mode":"raw","raw":"{\n  \"name\": \"Platform\",\n  \"key\": \"PLAT\"\n}"}}}
+    ]},
+    { "name": "Issues", "item": [
+      {"name":"List Issues","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/projects/{{projectId}}/issues","host":["{{baseUrl}}"],"path":["api","v1","projects","{{projectId}}","issues"]}}},
+      {"name":"Create Issue","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/projects/{{projectId}}/issues","host":["{{baseUrl}}"],"path":["api","v1","projects","{{projectId}}","issues"]},"body":{"mode":"raw","raw":"{\n  \"title\": \"Bug: API fails\",\n  \"description\": \"Steps...\",\n  \"type\": \"BUG\"\n}"}}},
+      {"name":"Update Issue","request":{"method":"PATCH","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/issues/{{issueId}}","host":["{{baseUrl}}"],"path":["api","v1","issues","{{issueId}}"]},"body":{"mode":"raw","raw":"{\n  \"status\": \"IN_PROGRESS\"\n}"}}},
+      {"name":"List Comments","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/issues/{{issueId}}/comments","host":["{{baseUrl}}"],"path":["api","v1","issues","{{issueId}}","comments"]}}},
+      {"name":"Create Comment","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/issues/{{issueId}}/comments","host":["{{baseUrl}}"],"path":["api","v1","issues","{{issueId}}","comments"]},"body":{"mode":"raw","raw":"{\n  \"body\": \"Looks good\"\n}"}}}
+    ]},
+    { "name": "Pages", "item": [
+      {"name":"List Pages","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/projects/{{projectId}}/pages","host":["{{baseUrl}}"],"path":["api","v1","projects","{{projectId}}","pages"]}}},
+      {"name":"Create Page","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/projects/{{projectId}}/pages","host":["{{baseUrl}}"],"path":["api","v1","projects","{{projectId}}","pages"]},"body":{"mode":"raw","raw":"{\n  \"title\": \"Spec\",\n  \"content\": \"# Spec\"\n}"}}},
+      {"name":"Export Page","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/pages/{{pageId}}/export","host":["{{baseUrl}}"],"path":["api","v1","pages","{{pageId}}","export"]}}}
+    ]},
+    { "name": "Sprints", "item": [
+      {"name":"List Sprints","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/projects/{{projectId}}/sprints","host":["{{baseUrl}}"],"path":["api","v1","projects","{{projectId}}","sprints"]}}},
+      {"name":"Create Sprint","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/projects/{{projectId}}/sprints","host":["{{baseUrl}}"],"path":["api","v1","projects","{{projectId}}","sprints"]},"body":{"mode":"raw","raw":"{\n  \"name\": \"Sprint 1\",\n  \"startDate\": \"2025-10-05T00:00:00.000Z\",\n  \"endDate\": \"2025-10-19T00:00:00.000Z\"\n}"}}}
+    ]},
+    { "name": "Attachments", "item": [
+      {"name":"Create Attachment","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/attachments","host":["{{baseUrl}}"],"path":["api","v1","attachments"]},"body":{"mode":"raw","raw":"{\n  \"projectId\": \"{{projectId}}\",\n  \"fileName\": \"spec.pdf\",\n  \"mimeType\": \"application/pdf\",\n  \"url\": \"https://example.com/spec.pdf\"\n}"}}}
+    ]},
+    { "name": "Billing", "item": [
+      {"name":"Provision Default Plan","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/billing/provision-default","host":["{{baseUrl}}"],"path":["api","v1","billing","provision-default"]}}},
+      {"name":"Start Trial (30 days)","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/billing/start-trial/{{orgId}}","host":["{{baseUrl}}"],"path":["api","v1","billing","start-trial","{{orgId}}"]}}},
+      {"name":"Get Subscription","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/billing/subscription/{{orgId}}","host":["{{baseUrl}}"],"path":["api","v1","billing","subscription","{{orgId}}"]}}},
+      {"name":"Set Razorpay Credentials","request":{"method":"POST","header":[{"key":"Authorization","value":"Bearer {{token}}"},{"key":"Content-Type","value":"application/json"}],"url":{"raw":"{{baseUrl}}/api/v1/billing/set-provider/{{orgId}}","host":["{{baseUrl}}"],"path":["api","v1","billing","set-provider","{{orgId}}"]},"body":{"mode":"raw","raw":"{\n  \"provider\": \"razorpay\",\n  \"keyId\": \"<YOUR_KEY_ID>\",\n  \"keySecret\": \"<YOUR_KEY_SECRET>\"\n}"}}}
+    ]},
+    { "name": "Admin", "item": [
+      {"name":"Health","request":{"method":"GET","url":{"raw":"{{baseUrl}}/health","host":["{{baseUrl}}"],"path":["health"]}}}
+    ]}
+  ]
+}

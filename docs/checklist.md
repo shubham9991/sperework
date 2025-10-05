@@ -1,0 +1,25 @@
+# Implementation Checklist (AI tickable)
+
+- [ ] Repo initialized with `frontend/` and `backend/` folders
+- [ ] Frontend scaffolded with Vite React + AntD + MUI
+- [ ] Backend scaffolded (Node.js + TypeScript + Fastify/Express)
+- [ ] Database: Postgres connection + migration tool configured
+- [ ] Auth: email/password + JWT sessions
+- [ ] SSO: SAML/OIDC config screens (stub)
+- [ ] RBAC: roles and permissions baseline
+- [ ] Orgs/Projects/Teams entities and CRUD APIs
+- [ ] Issues module: CRUD + board + backlog endpoints
+- [ ] Sprints: create/start/close endpoints
+- [ ] Wiki pages: CRUD + export PDF stub
+- [ ] Integrations: GitHub link commits + Slack notifications (basic)
+- [ ] File storage: S3/MinIO config and upload API
+- [ ] Admin console: user mgmt + branding upload (logo/colors)
+- [ ] On‑prem: Docker Compose with LICENSE_KEY support
+- [ ] License service: validate key, offline activation
+- [ ] Webhooks: issue.created/updated events
+- [ ] API docs: OpenAPI generated
+- [ ] CI: GitHub Actions build/test
+- [ ] Observability: basic metrics and logs
+- [ ] Importers: CSV + Jira (basic)
+- [ ] Marketplace skeleton + 20 connectors list
+- [ ] Mobile notifications (server push)
