@@ -19,3 +19,47 @@ export function toPrismaArgs(params: PaginationParams) {
 	const orderBy = params.sortBy ? { [params.sortBy]: params.sortOrder || 'asc' } : undefined as any;
 	return { skip, take, orderBy };
 }
+
+export type PaginatedResult<T> = {
+  data: T[];
+  meta: {
+    total: number;
+    page: number;
+    perPage: number;
+    totalPages: number;
+  };
+};
+
+export const paginate = async <T, K extends { where?: any, orderBy?: any, include?: any, select?: any }>(
+  model: {
+    count: (args: { where: K['where'] }) => Promise<number>;
+    findMany: (args: K & { skip?: number; take?: number }) => Promise<T[]>;
+  },
+  args: K,
+  options: { page?: number, perPage?: number } = {}
+): Promise<PaginatedResult<T>> => {
+  const page = options.page || 1;
+  const perPage = options.perPage || 20;
+
+  const skip = (page - 1) * perPage;
+  const take = perPage;
+
+  const [total, data] = await Promise.all([
+    model.count({ where: args.where }),
+    model.findMany({
+      ...args,
+      skip,
+      take,
+    }),
+  ]);
+
+  return {
+    data,
+    meta: {
+      total,
+      page,
+      perPage,
+      totalPages: Math.ceil(total / perPage),
+    },
+  };
+};

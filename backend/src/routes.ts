@@ -11,6 +11,7 @@ import { attachmentRoutes } from './routes/attachments';
 import { billingRoutes } from './routes/billing';
 import { roleRoutes } from './routes/roles';
 import { teamRoutes } from './routes/teams';
+import auditRoutes from './routes/audit';
 
 export async function registerRoutes(app: FastifyInstance) {
 	app.get('/health', async () => ({ status: 'ok' }));
@@ -26,4 +27,5 @@ export async function registerRoutes(app: FastifyInstance) {
 	await app.register(billingRoutes, { prefix: '/api/v1' });
 	await app.register(roleRoutes, { prefix: '/api/v1' });
 	await app.register(teamRoutes, { prefix: '/api/v1' });
+	await app.register(auditRoutes, { prefix: '/api/v1' });
 }

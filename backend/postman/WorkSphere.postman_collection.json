@@ -49,6 +49,9 @@
     ]},
     { "name": "Admin", "item": [
       {"name":"Health","request":{"method":"GET","url":{"raw":"{{baseUrl}}/health","host":["{{baseUrl}}"],"path":["health"]}}}
+    ]},
+    { "name": "Audit", "item": [
+      {"name":"List Audit Logs","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":{"raw":"{{baseUrl}}/api/v1/audit?page=1&perPage=10","host":["{{baseUrl}}"],"path":["api","v1","audit"],"query":[{"key":"page","value":"1"},{"key":"perPage","value":"10"}]}}}
     ]}
   ]
 }

@@ -8,17 +8,21 @@ const requestSchema = z.object({ email: z.string().email() });
 const confirmSchema = z.object({ token: z.string().min(10), password: z.string().min(8) });
 
 export async function passwordResetRoutes(app: FastifyInstance) {
-	app.post('/auth/password/reset/request', async (req, reply) => {
-		const parsed = requestSchema.safeParse(req.body);
-		if (!parsed.success) return reply.code(400).send({ error: 'Invalid payload' });
-		const user = await prisma.user.findUnique({ where: { email: parsed.data.email } });
-		if (user) {
-			const token = crypto.randomBytes(24).toString('hex');
-			await prisma.passwordResetToken.create({ data: { userId: user.id, token, expiresAt: new Date(Date.now() + 1000 * 60 * 30) } });
-			// TODO: integrate email provider to send the token link
-		}
-		return { status: 'ok' };
-	});
+	   app.post('/auth/password/reset/request', async (req, reply) => {
+		   const parsed = requestSchema.safeParse(req.body);
+		   if (!parsed.success) return reply.code(400).send({ error: 'Invalid payload' });
+		   const user = await prisma.user.findUnique({ where: { email: parsed.data.email } });
+		   if (user) {
+			   const token = crypto.randomBytes(24).toString('hex');
+			   await prisma.passwordResetToken.create({ data: { userId: user.id, token, expiresAt: new Date(Date.now() + 1000 * 60 * 30) } });
+			   // Send password reset email
+			   const { sendMail, renderTemplate } = await import('../lib/email');
+			   const link = `${process.env.CORS_ORIGIN}/reset-password?token=${token}`;
+			   const html = renderTemplate('reset', { link });
+			   await sendMail({ to: user.email, subject: 'Password Reset', html });
+		   }
+		   return { status: 'ok' };
+	   });
 
 	app.post('/auth/password/reset/confirm', async (req, reply) => {
 		const parsed = confirmSchema.safeParse(req.body);

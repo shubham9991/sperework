@@ -116,3 +116,43 @@ Common Troubleshooting
 - 401 Unauthorized: Ensure `token` env var is set to a valid JWT from Login
 - 404 Not Found: Confirm you set `orgId`, `projectId`, `issueId`, `pageId` correctly
 - CORS: baseUrl must be http://localhost:4000 (no trailing slash)
+
+Audit Logs
+1) Trigger Audit Events
+   - Create/update an issue
+   - Create a comment
+2) List Audit Logs (admin-only)
+   - Request: Audit -> List Audit Logs
+   - Verify that the events from step 1 are present in the response.
+   - Test filters (userId, entityType) to narrow down results.
+
+## New Endpoints & Features
+
+- **Full-text Search**
+  - `/issues/search?q=...` returns issues matching query
+  - `/pages/search?q=...` returns pages matching query
+
+- **Slack Notifications**
+  - `/notifications/slack` (POST) with `{ webhookUrl, text }` sends a Slack message
+
+- **Rate Limiting**
+  - All endpoints are rate limited to 100 requests/minute per IP
+
+- **OpenTelemetry**
+  - Tracing and metrics are enabled; check logs and OTEL collector
+
+- **Attachments**
+  - `/attachments` (GET) list attachments
+  - `/attachments/:attachmentId` (DELETE) delete attachment
+  - `/attachments/presign` (POST) get S3/MinIO presigned upload URL
+
+- **Comments**
+  - `/comments/:commentId` (PATCH) edit comment
+  - `/comments/:commentId` (DELETE) delete comment
+
+- **Sprints**
+  - `/sprints/:sprintId` (PATCH) update sprint
+  - `/sprints/:sprintId` (DELETE) delete sprint
+
+- **Validation Errors**
+  - All Zod validation errors return RFC7807 problem+json with details

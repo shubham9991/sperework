@@ -5,6 +5,29 @@ import { prisma } from '../lib/prisma';
 const createPageSchema = z.object({ projectId: z.string().cuid(), title: z.string().min(1), content: z.string().default('') });
 
 export async function pageRoutes(app: FastifyInstance) {
+	// Full-text search endpoint using OpenSearch
+	app.get('/pages/search', { preHandler: [app.authenticate as any] }, async (req) => {
+		const q = (req.query as any).q as string;
+		if (!q) return { items: [], total: 0 };
+		try {
+			const { body } = await app.opensearch.search({
+				index: 'pages',
+				body: {
+					query: {
+						multi_match: {
+							query: q,
+							fields: ['title', 'content']
+						}
+					}
+				}
+			});
+			const items = body.hits.hits.map((hit: any) => hit._source);
+			return { items, total: body.hits.total.value };
+		} catch (err) {
+			app.log.error(err);
+			return { items: [], total: 0 };
+		}
+	});
 	app.get('/projects/:projectId/pages', { preHandler: [app.authenticate as any] }, async (req) => {
 		const projectId = (req.params as any).projectId as string;
 		return prisma.page.findMany({ where: { projectId } });

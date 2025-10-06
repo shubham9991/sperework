@@ -222,3 +222,14 @@ model PaymentProviderConfig {
   updatedAt DateTime @updatedAt
   org       Organization @relation(fields: [orgId], references: [id])
 }
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  userId    String
+  orgId     String
+  entityId  String
+  entityType String
+  createdAt DateTime @default(now())
+  details   Json?
+}
