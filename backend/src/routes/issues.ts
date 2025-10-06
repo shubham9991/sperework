@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma';
+import { parsePagination, toPrismaArgs } from '../lib/pagination';
 
 const createIssueSchema = z.object({
 	projectId: z.string().cuid(),
@@ -13,7 +14,13 @@ const createIssueSchema = z.object({
 export async function issueRoutes(app: FastifyInstance) {
 	app.get('/projects/:projectId/issues', { preHandler: [app.authenticate as any] }, async (req) => {
 		const projectId = (req.params as any).projectId as string;
-		return prisma.issue.findMany({ where: { projectId } });
+		const { page, pageSize, sortBy, sortOrder } = parsePagination(req.query as any);
+		const { skip, take, orderBy } = toPrismaArgs({ page, pageSize, sortBy, sortOrder });
+		const [items, total] = await Promise.all([
+			prisma.issue.findMany({ where: { projectId }, skip, take, orderBy: orderBy as any }),
+			prisma.issue.count({ where: { projectId } })
+		]);
+		return { items, page, pageSize, total };
 	});
 
 	app.post('/projects/:projectId/issues', { preHandler: [app.authenticate as any] }, async (req, reply) => {

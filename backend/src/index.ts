@@ -6,6 +6,8 @@ import { registerRoutes } from './routes';
 import authPlugin from './plugins/auth';
 import securityHeaders from './plugins/security';
 import rbac from './plugins/rbac';
+import errors from './plugins/errors';
+import requestId from './plugins/requestId';
 
 const server = Fastify({
 	logger: {
@@ -13,6 +15,8 @@ const server = Fastify({
 		level: 'info'
 	}
 });
+
+await server.register(requestId);
 
 await server.register(cors, {
 	origin: process.env.CORS_ORIGIN?.split(',') || true,
@@ -26,11 +30,12 @@ await server.register(jwt, {
 await server.register(authPlugin);
 await server.register(securityHeaders);
 await server.register(rbac);
+await server.register(errors);
 
 await registerRoutes(server);
 
 const port = Number(process.env.PORT || 4000);
-server.listen({ port, host: '0.0.0.0' }).catch((err) => {
+server.listen({ port, host: '127.0.0.1' }).catch((err) => {
 	server.log.error(err);
 	process.exit(1);
 });
